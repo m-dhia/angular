@@ -1,0 +1,132 @@
+.submit-form {
+  max-width: 400px;
+  margin: auto;
+}
+.container {
+  max-width: 600px; /* Adjust based on your layout preference */
+  margin: auto;
+  padding: 20px;
+  background: #f4f4f4; /* Light grey background */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.row {
+  margin-bottom: 20px; /* Space between rows */
+}
+
+.col-md-12 {
+  padding: 0 15px; /* Padding inside each column */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-control {
+  display: block;
+  width: 100%; /* Make inputs full width */
+  padding: .375rem .75rem; /* Padding inside inputs */
+  font-size: 1rem; /* Text size */
+  line-height: 1.5; /* Line height */
+  color: #495057; /* Text color */
+  background-color: #fff; /* White background */
+  background-clip: padding-box;
+  border: 1px solid #ced4da; /* Border around inputs */
+  border-radius: .25rem; /* Rounded corners for inputs */
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; /* Smooth transition for focus */
+}
+
+label {
+  display: inline-block;
+  margin-bottom: .5rem; /* Space between label and input */
+  font-weight: bold; /* Make labels bold */
+}
+
+.btn-success {
+  color: #fff; /* White text */
+  background-color: #28a745; /* Green background */
+  border-color: #28a745; /* Green border */
+  padding: .375rem .75rem; /* Padding inside button */
+  border-radius: .25rem; /* Rounded corners for button */
+  font-size: 1rem; /* Button text size */
+  line-height: 1.5; /* Button line height */
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; /* Smooth transition for button states */
+}
+
+.btn-success:hover {
+  background-color: #218838; /* Darker green on hover */
+  border-color: #1e7e34; /* Darker green border on hover */
+}
+
+.btn-block {
+  display: block;
+  width: 100%; /* Make button full width */
+}
+
+.id-group {
+  display: flex; /* Use flexbox to lay out children side by side */
+  gap: 10px; /* Space between the select and input elements */
+}
+
+.type-select, .id-number {
+  flex: 1; /* Both children take up equal space */
+}
+.dash-between {
+  display: flex; /* Use flex to center the dash vertically */
+  align-items: center; /* Center the dash vertically in line with the input and select */
+  justify-content: center; /* Center the dash horizontally in its container */
+  padding: 0 5px; /* Add some padding to give space around the dash */
+}
+
+.logiciels-group .logiciels-fields {
+  display: flex; /* Enables flexbox layout */
+  flex-wrap: wrap; /* Allows items to wrap to the next line as needed */
+  gap: 10px; /* Space between the input fields */
+  align-items: center; /* Aligns items vertically */
+}
+
+.logiciels-group .form-control {
+  flex-grow: 1; /* Allows the input fields to grow and fill available space */
+  min-width: 120px; /* Minimum width for each input field to ensure readability */
+}
+
+.logiciels-container {
+  display: flex; /* Enable flexbox layout */
+  flex-wrap: wrap; /* Allow items to wrap as needed */
+  gap: 20px; /* Space between items */
+}
+
+.logiciels-item {
+  flex: 1; /* Each item takes equal space */
+  min-width: 120px; /* Minimum width of each item to ensure readability */
+}
+.logiciels-container {
+  display: flex; /* Enable flexbox layout */
+  flex-direction: column; /* Stack the .logiciels-item containers vertically */
+  gap: 20px; /* Space between vertically stacked items */
+}
+
+.logiciels-item {
+  display: flex; /* Enable flexbox layout within each .logiciels-item */
+  gap: 10px; /* Space between the inputs */
+  align-items: center; /* Align the inputs vertically */
+}
+
+.form-control {
+  flex-grow: 1; /* Allows the input fields to grow and fill available space, adjust if necessary */
+  min-width: 0; /* Overrides the default min-width to allow flexibility in flex items */
+}
+@media (max-width: 768px) {
+  .submit-form, .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+  .form-control, .btn {
+    font-size: 16px;
+  }
+}
+.btn-success:hover, .btn-success:focus {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: scale(1.05); /* Slightly enlarge */
+}

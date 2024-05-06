@@ -1,0 +1,124 @@
+<!-- Titre -->
+<h1 style="text-align: center;">Fiche Serveur </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <!-- ID -->
+          <label for="idGroup">ID</label>
+          <div id="idGroup" class="id-group">
+            <div class="type-select">
+              <select class="form-control" id="typeSelect" [(ngModel)]="selectedType" name="typeSelect" (change)="onTypeChange()">
+                <option value="APP">APP</option>
+                <option value="BDD">BDD</option>
+                <option value="ADM">ADM</option>
+              </select>
+            </div>
+            <div class="dash-between">-</div>
+            <div class="id-number">
+              <input type="number" class="form-control" id="idNumber" [(ngModel)]="idNumber" name="idNumber" required [min]="minValue" />
+            </div>
+          </div>
+        </div>
+        <!-- Statut -->
+        <div class="form-group">
+          <label for="statut">Statut</label>
+          <select class="form-control" id="statut" [(ngModel)]="serveur.statut" name="statut" required>
+            <option value="">Sélectionner...</option>
+            <option value="Actif">Actif</option>
+            <option value="Non Actif">Non Actif</option>
+            <option value="EndOfLife">Fin de Vie</option>
+          </select>
+        </div>
+        <!-- Details -->
+        <div class="form-group">
+          <label for="details_dns">Détails</label>
+          <!-- IP -->
+          <input type="text" class="form-control mb-3" id="details_ip" [(ngModel)]="serveur.ip" name="details_ip" required placeholder="IP" />
+          <!-- DNS -->
+          <input type="text" class="form-control mb-3" id="details_dns" [(ngModel)]="serveur.dns" name="details_dns" required placeholder="DNS" />
+          <!-- Hostname -->
+          <input type="text" class="form-control mb-3" id="details_hostname" [(ngModel)]="serveur.hostname" name="details_hostname" required placeholder="Hostname" />
+          <!-- Nature -->
+          <input type="text" class="form-control mb-3" id="details_nature" [(ngModel)]="serveur.nature" name="details_nature" required placeholder="Nature" />
+          <!-- Phy VM -->
+          <select class="form-control mb-3" id="details_phy_vm" [(ngModel)]="serveur.phy_vm" name="details_phy_vm" required>
+            <option value="">Phy / VM</option>
+            <!-- Placeholder-like option -->
+            <option value="Phy">Phy</option>
+            <option value="Vm">Vm</option>
+          </select>
+          <!-- Prod / Int / PCA -->
+          <select class="form-control mb-3" id="details_prod_int_pca" [(ngModel)]="serveur.prod_int_pca" name="details_prod_int_pca" required>
+            <option value="">Prod / Int / PCA</option>
+            <!-- Placeholder-like option -->
+            <option value="Prod">Prod</option>
+            <option value="Int">Int</option>
+            <option value="PCA">PCA</option>
+          </select>
+        </div>
+        <!-- Logiciels -->
+        <div class="form-group">
+          <label for="logicielsGroup">Logiciels</label>
+          <div id="logicielsGroup" class="logiciels-container">
+            <div class="logiciels-item">
+              <input type="text" class="form-control" id="logiciels_version" [(ngModel)]="serveur.version" name="logiciels_version" required placeholder="Version" />
+              <input type="number" class="form-control" id="logiciels_port" [(ngModel)]="serveur.port" name="logiciels_port" required placeholder="Port" />
+              <input type="text" class="form-control" id="logiciels_path" [(ngModel)]="serveur.path" name="logiciels_path" required placeholder="Path" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cpu">CPU</label>
+          <input type="number" class="form-control" id="cpu" [(ngModel)]="serveur.cpu" name="cpu" required />
+        </div>
+        <div class="form-group">
+          <label for="ram">RAM</label>
+          <input type="number" class="form-control" id="ram" [(ngModel)]="serveur.ram" name="ram" required />
+        </div>
+        <div class="form-group">
+          <label for="disc">Disque</label>
+          <input type="number" class="form-control" id="disc" [(ngModel)]="serveur.disc" name="disc" required />
+        </div>
+        <div class="form-group">
+          <label for="carte_rsx">Carte RSX</label>
+          <input type="text" class="form-control" id="carte_rsx" [(ngModel)]="serveur.carte_rsx" name="carte_rsx" required />
+        </div>
+        <div class="form-group">
+          <label for="os">Système d'exploitation</label>
+          <input type="text" class="form-control" id="os" [(ngModel)]="serveur.os" name="os" required />
+        </div>
+        <div class="form-group">
+          <label for="services_a_demarrer">Services à démarrer</label>
+          <input type="text" class="form-control" id="services_a_demarrer" [(ngModel)]="serveur.services_a_demarrer" name="services_a_demarrer" required />
+        </div>
+        <!-- Flux entrant -->
+        <div class="form-group">
+          <label for="flux_entrant">Flux entrant</label>
+          <input type="text" class="form-control" id="flux_entrant" [(ngModel)]="serveur.flux_entrant" name="flux_entrant" placeholder="URL Pour La matrice de flux entrant" required />
+        </div>
+        <!-- Flux sortant -->
+        <div class="form-group">
+          <label for="flux_sortant">Flux sortant</label>
+          <input type="text" class="form-control" id="flux_sortant" [(ngModel)]="serveur.flux_sortant" name="flux_sortant" placeholder="URL Pour la matrice de flux sortant" required />
+        </div>
+        <!-- Flux entrant -->
+        <div class="form-group">
+          <label for="acces">Accès</label>
+          <input type="text" class="form-control" id="acces" [(ngModel)]="serveur.acces" name="acces" placeholder="URL Pour La matrice d'accès" required />
+        </div>
+        <!-- Save button -->
+        
+        <button (click)="saveServeur()" class="btn btn-success btn-block" > Save </button>
+      </div>
+        <div *ngIf="submitted">
+          <h4>Server Added Successfully!</h4>
+          <button class="btn btn-success" (click)="newServeur()">Add Another Server</button>
+          <button class="btn btn-primary" routerLink="/">Go to Homepage</button>
+
+        </div>
+      
+    </div>
+  </div>
+</div>

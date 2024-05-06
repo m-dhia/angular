@@ -1,0 +1,45 @@
+<div class="list row">
+  <div class="col-md-8">
+      <div class="input-group mb-3">
+          <input
+              type="text"
+              class="form-control"
+              placeholder="Search by ID"
+              [(ngModel)]="id"
+          />
+          <div class="input-group-append">
+              <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="searchID()"
+              >
+                  Search
+              </button>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <h4>Serveurs List</h4>
+      <ul class="list-group">
+          <li *ngFor="let serveur of serveurs; let i = index"
+              class="list-group-item"
+              [class.active]="i == currentIndex"
+              (click)="setActiveServeur(serveur, i)">
+              <input type="checkbox" *ngIf="showCheckboxes" [(ngModel)]="serveur['checked']"> {{ serveur.id }}
+          </li>
+      </ul>
+
+      <button class="m-3 btn btn-sm btn-danger" (click)="showDeleteButton = true" (click)="showCheckboxes = !showCheckboxes">
+          Select Servers to Delete
+      </button>
+      <button *ngIf="showCheckboxes" class="m-3 btn btn-sm btn-danger" (click)="removeSelectedServeurs()" >
+          Delete Selected Servers
+      </button>
+  </div>
+  <div class="col-md-6">
+      <app-serveur-details
+          [viewMode]="true"
+          [currentServeur]="currentServeur"
+      ></app-serveur-details>
+  </div>
+</div>

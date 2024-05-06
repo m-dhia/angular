@@ -1,0 +1,71 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentServeur.id">
+    <h4>Serveur</h4>
+    <div><label><strong>ID:</strong></label> {{ currentServeur.id }}</div>
+    <div><label><strong>IP:</strong></label> {{ currentServeur.ip }}</div>
+    <div><label><strong>DNS:</strong></label> {{ currentServeur.dns }}</div>
+    <div><label><strong>HOSTNAME:</strong></label> {{ currentServeur.hostname }}</div>
+    <div><label><strong>OS:</strong></label> {{ currentServeur.os }}</div>
+    <div><label><strong>PORT:</strong></label> {{ currentServeur.port }}</div>
+    <div><label><strong>PATH:</strong></label> {{ currentServeur.path }}</div>
+    <div><label><strong>SERVICES:</strong></label> {{ currentServeur.services_a_demarrer }}</div>
+    <div><label><strong>ACCESS:</strong></label> {{ currentServeur.acces }}</div>
+    <div class="btn-group" role="group">
+      <a class="badge badge-warning" routerLink="/serveurs/{{ currentServeur.id }}">Edit</a>
+      <a class="badge badge-danger" routerLink="/serveurs/{{ currentServeur.id }}" (click)="deleteServeur()">Delete</a>
+    </div>
+  </div>
+  <div *ngIf="!currentServeur.id">
+    <p>Please click on a Serveur...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentServeur.id" class="edit-form">
+    <h4>Serveur</h4>
+    <form>
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" [(ngModel)]="currentServeur.id" name="id" />
+      </div>
+      <div class="form-group">
+        <label for="ip">IP</label>
+        <input type="text" class="form-control" id="ip" [(ngModel)]="currentServeur.ip" name="ip" required />
+      </div>
+      <div class="form-group">
+        <label for="dns">DNS</label>
+        <input type="text" class="form-control" id="dns" [(ngModel)]="currentServeur.dns" name="dns" required />
+      </div>
+      <div class="form-group">
+        <label for="hostname">Hostname</label>
+        <input type="text" class="form-control" id="hostname" [(ngModel)]="currentServeur.hostname" name="hostname" required />
+      </div>
+      <div class="form-group">
+        <label for="os">Système d'exploitation</label>
+        <input type="text" class="form-control" id="os" [(ngModel)]="currentServeur.os" name="os" required />
+      </div>
+      <div class="form-group">
+        <label for="port">Port</label>
+        <input type="number" class="form-control" id="port" [(ngModel)]="currentServeur.port" name="port" required />
+      </div>
+      <div class="form-group">
+        <label for="path">Path</label>
+        <input type="text" class="form-control" id="path" [(ngModel)]="currentServeur.path" name="path" required />
+      </div>
+      <div class="form-group">
+        <label for="services_a_demarrer">Services à démarrer</label>
+        <input type="text" class="form-control" id="services_a_demarrer" [(ngModel)]="currentServeur.services_a_demarrer" name="services_a_demarrer" required />
+      </div>
+      <div class="form-group">
+        <label for="acces">Accès</label>
+        <input type="text" class="form-control" id="acces" [(ngModel)]="currentServeur.acces" name="acces" required />
+      </div>
+      <button class="badge badge-danger mr-2" (click)="deleteServeur()">Delete</button>
+      <button type="submit" class="badge badge-success mb-2" (click)="updateServeur()">Update</button>
+    </form>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentServeur.id">
+    <p>Cannot access this Serveur...</p>
+  </div>
+</ng-template>
