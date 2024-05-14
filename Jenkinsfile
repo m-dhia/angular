@@ -43,7 +43,7 @@ environment {
   stage('Trivy Scan') {
     steps {
         script {
-            sh "touch ~/Documents/TrivyLogs.txt"
+            sh "touch "TrivyLogs-$(date +'%S-%M-%H-%d-%m-%Y').txt"
             sh "trivy ${IMAGE_NAME}:${IMAGE_TAG} >> ~/Documents/TrivyLogs.txt"
         }
     }
