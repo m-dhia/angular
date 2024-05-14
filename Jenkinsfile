@@ -40,8 +40,15 @@ environment {
 
        }
 
+   stage('Trivy Scan') {
+    steps {
+        script {
+            sh "trivy ${IMAGE_NAME}:${IMAGE_TAG}"
+        }
+    }
+}
 
-
+   		
 
 
     
