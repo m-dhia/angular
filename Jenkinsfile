@@ -40,13 +40,15 @@ environment {
 
        }
 
-   stage('Trivy Scan') {
+  stage('Trivy Scan') {
     steps {
         script {
-            sh "trivy ${IMAGE_NAME}:${IMAGE_TAG}"
+            sh "touch ~/Documents/TrivyLogs.txt"
+            sh "trivy ${IMAGE_NAME}:${IMAGE_TAG} >> ~/Documents/TrivyLogs.txt"
         }
     }
 }
+
 
    		
 
