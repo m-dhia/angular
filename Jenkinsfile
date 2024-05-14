@@ -24,17 +24,7 @@ environment {
       }
     }
 
-	   stages {
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    docker.image('sonarsource/sonar-scanner-cli').inside {
-                        sh 'sonar-scanner'
-                    }
-                }
-            }
-        }
-    }
+	  
 
     stage("Build & Push Docker Image") {
             steps {
