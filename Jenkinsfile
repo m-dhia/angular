@@ -24,15 +24,17 @@ environment {
       }
     }
 
-	  stage("SonarQube Analysis") {
-    steps {
-        script {
-            withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                sh "sonar-scanner"
+	   stages {
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    docker.image('sonarsource/sonar-scanner-cli').inside {
+                        sh 'sonar-scanner'
+                    }
+                }
             }
         }
     }
-}
 
     stage("Build & Push Docker Image") {
             steps {
