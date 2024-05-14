@@ -4,7 +4,7 @@ pipeline {
     APP_NAME = "show-app"
     RELEASE = "1.0.0"
     DOCKER_USER = "mdhiadhia"
-    DOCKER_PASS = "96960c3a-cad3-4634-a354-c160f12da0d9"
+    DOCKER_PASS = 'dockerhub'
     IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
     IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     // JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
