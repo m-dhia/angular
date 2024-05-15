@@ -6,7 +6,7 @@ pipeline {
     RELEASE = "1.0.0"
     DOCKER_USER = "mdhiadhia"
     DOCKER_PASS = 'dockerhub'
-    IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+    IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
     IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
   }
 
@@ -23,28 +23,26 @@ pipeline {
       }
     }
 
-      stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
+    stage('SonarQube Scan') {
+      steps {
+        script {
+          docker.image('sonarqube:latest').inside {
+            sh "sonar-scanner -Dsonar.projectKey=AppStar -Dsonar.host.url=http://localhost:9000"
+          }
+        }
+      }
     }
-  }
 
-    
     stage("Build & Push Docker Image") {
       steps {
         script {
           docker.withRegistry('', DOCKER_PASS) {
-            docker_image = docker.build "${IMAGE_NAME}"
-          }
-
-          docker.withRegistry('', DOCKER_PASS) {
-            docker_image.push("${IMAGE_TAG}")
-            docker_image.push('latest')
+            def docker_image = docker.build "${IMAGE_NAME}:${IMAGE_TAG}"
+            docker_image.push()
+            docker_image.push("latest")
           }
         }
       }
-
     }
 
     stage('Trivy Scan') {
