@@ -28,7 +28,7 @@ pipeline {
                 script {
                     // Use the SonarQube Scanner plugin
                     withSonarQubeEnv('sonarqube-server') {
-                        sh "sonar-scanner -Dsonar.projectKey=${params.SONAR_PROJECT_KEY}"
+                        sh "sonar-scanner -Dsonar.projectKey=AppStar"
                     }
                 }
             }
