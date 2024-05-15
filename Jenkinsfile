@@ -22,20 +22,7 @@ pipeline {
         sh 'npm run build'
       }
     }
-stage('SonarQube Code Analysis') {
-            steps {
-                dir("${WORKSPACE}"){
-                // Run SonarQube analysis for Python
-                script {
-                    def scannerHome = tool name: 'scanner-name', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('SonarQube') {
-                        sh "echo $pwd"
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-            }
-       }
+
       stage('SonarQube Scan') {
             steps {
                 script {
