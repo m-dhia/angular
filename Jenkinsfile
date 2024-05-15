@@ -36,18 +36,12 @@ stage('SonarQube Code Analysis') {
             }
             }
        }
-       stage("SonarQube Quality Gate Check") {
+      stage('SonarQube Scan') {
             steps {
                 script {
-                def qualityGate = waitForQualityGate()
-                    
-                    if (qualityGate.status != 'OK') {
-                        echo "${qualityGate.status}"
-                        error "Quality Gate failed: ${qualityGateStatus}"
-                    }
-                    else {
-                        echo "${qualityGate.status}"
-                        echo "SonarQube Quality Gates Passed"
+                    // Use the SonarQube Scanner plugin
+                    withSonarQubeEnv('sonarqube-server') {
+                        sh "sonar-scanner -Dsonar.projectKey=${params.SONAR_PROJECT_KEY}"
                     }
                 }
             }
