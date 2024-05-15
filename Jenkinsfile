@@ -23,17 +23,17 @@ pipeline {
       }
     }
 
-stage("SonarQube Analysis") {
-    steps {
-        script {
-            withSonarQubeEnv({
-                credentialsId: 'jenkins-sonarqube-token'
-            }) {
-                sh 'mvn sonar:sonar'
+stage('SonarQube Analysis') {
+            steps {
+                // Run SonarQube analysis using configured SonarQube installation
+                script {
+                    def scannerHome = tool 'SonarQube'
+                    withSonarQubeEnv(installationName: scannerHome) {
+                        sh 'sonar-scanner'
+                    }
+                }
             }
         }
-    }
-}
 
     
     stage("Build & Push Docker Image") {
