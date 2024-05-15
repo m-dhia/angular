@@ -23,11 +23,11 @@ pipeline {
       }
     }
 
-stage('SonarQube Analysis') {
+/* stage('SonarQube Analysis') {
       steps {
         echo " test this code "
       }
-    }
+    } */
     
 
     stage("Build & Push Docker Image") {
