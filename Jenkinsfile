@@ -23,17 +23,11 @@ pipeline {
       }
     }
 
-stage('SonarQube Analysis') {
-            steps {
-                // Run SonarQube analysis using configured SonarQube installation
-                script {
-                    def scannerHome = tool 'SonarQube'
-                    withSonarQubeEnv(installationName: scannerHome) {
-                        sh 'sonar-scanner'
-                    }
-                }
-            }
+ stage('Scan') {
+        docker.image('my-scanner-new').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""') {
+        sh "/usr/local/bin/sonar-scanner"
         }
+    }
 
     
     stage("Build & Push Docker Image") {
