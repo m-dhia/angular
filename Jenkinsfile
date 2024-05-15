@@ -26,9 +26,8 @@ pipeline {
       stage('SonarQube Scan') {
             steps {
                 script {
-                    // Use the SonarQube Scanner plugin
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh "sonar-scanner -Dsonar.projectKey=AppStar"
+                    docker.image('sonarqube:latest').inside {
+                        sh "sonar-scanner -Dsonar.projectKey=AppStar -Dsonar.host.url=http://localhost:9000"
                     }
                 }
             }
