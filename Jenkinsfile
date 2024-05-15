@@ -28,7 +28,7 @@ stage('SonarQube Code Analysis') {
                 // Run SonarQube analysis for Python
                 script {
                     def scannerHome = tool name: 'scanner-name', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('sonar') {
+                    withSonarQubeEnv('SonarQube') {
                         sh "echo $pwd"
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
