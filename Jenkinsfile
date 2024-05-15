@@ -26,7 +26,7 @@ pipeline {
  stage('Scan') {
             steps {
                 script {
-                    docker.image('my-scanner-new').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""') {
+                    docker.image('sonarqube').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""') {
                         sh "/usr/local/bin/sonar-scanner"
                     }
                 }
