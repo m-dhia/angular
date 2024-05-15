@@ -23,16 +23,12 @@ pipeline {
       }
     }
 
-    stage('SonarQube Scan') {
-      steps {
-        script {
-          docker.image('sonarqube:latest').inside {
-            sh "sonar-scanner -Dsonar.projectKey=AppStar -Dsonar.host.url=http://localhost:9000"
-          }
-        }
-      }
+     stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
     }
-
+  }
     stage("Build & Push Docker Image") {
       steps {
         script {
