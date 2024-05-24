@@ -63,7 +63,9 @@ stage('OWASP Dependency-Check Vulnerabilities') {
           sh "touch TrivyLogs-${timestamp}.txt"
           sh "trivy ${IMAGE_NAME}:${IMAGE_TAG} > TrivyLogs-${timestamp}.txt"
         }
-    
+      }
+    }
+
         stage('Push Docker Image') {
             steps {
                 script {
@@ -78,8 +80,6 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
 
    
-      }
-    }
-
+    
   }
 }
