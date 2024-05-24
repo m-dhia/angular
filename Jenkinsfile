@@ -55,6 +55,15 @@ stage('OWASP Dependency-Check Vulnerabilities') {
                 }
             }
         }
+
+     stage('Trivy Scan') {
+      steps {
+        script {
+          def timestamp = sh(script: "date +'%S-%M-%H-%d-%m-%Y'", returnStdout: true).trim()
+          sh "touch TrivyLogs-${timestamp}.txt"
+          sh "trivy ${IMAGE_NAME}:${IMAGE_TAG} > TrivyLogs-${timestamp}.txt"
+        }
+    
         stage('Push Docker Image') {
             steps {
                 script {
@@ -68,13 +77,7 @@ stage('OWASP Dependency-Check Vulnerabilities') {
             }
         }
 
-    stage('Trivy Scan') {
-      steps {
-        script {
-          def timestamp = sh(script: "date +'%S-%M-%H-%d-%m-%Y'", returnStdout: true).trim()
-          sh "touch TrivyLogs-${timestamp}.txt"
-          sh "trivy ${IMAGE_NAME}:${IMAGE_TAG} > TrivyLogs-${timestamp}.txt"
-        }
+   
       }
     }
 
