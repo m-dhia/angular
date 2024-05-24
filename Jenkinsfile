@@ -47,17 +47,26 @@ stage('OWASP Dependency-Check Vulnerabilities') {
     }
     
 
-    stage("Build & Push Docker Image") {
-      steps {
-        script {
-          docker.withRegistry('', DOCKER_PASS) {
-            def docker_image = docker.build "${IMAGE_NAME}:${IMAGE_TAG}"
-            docker_image.push()
-            docker_image.push("latest")
-          }
+    stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                }
+            }
         }
-      }
-    }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push the Docker image to the registry
+                    docker.withRegistry('', DOCKER_PASS) {
+                        def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
+                        dockerImage.push()
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
 
     stage('Trivy Scan') {
       steps {
