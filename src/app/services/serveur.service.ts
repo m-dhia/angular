@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Serveur } from '../models/serveur.model';
 
-const baseUrl = 'http://localhost:3000/api/serveurs';
+const baseUrl = 'http://20.19.33.63:3000/api/serveurs';
 
 @Injectable({
   providedIn: 'root'
