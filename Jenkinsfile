@@ -79,7 +79,14 @@ stage('OWASP Dependency-Check Vulnerabilities') {
             }
         }
 
-   
+    stage('Deploy with Ansible') {
+      steps {
+        script {
+          // Run Ansible playbook for deployment
+          sh "ansible-playbook playbook.yml"
+        }
+      }
+    }
     
   }
 }
