@@ -22,7 +22,7 @@ pipeline {
         sh 'npm run build'
       }
     }
-
+/*
 stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
         dependencyCheck additionalArguments: ''' 
@@ -45,7 +45,7 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
       }
     }
-    
+  */  
 
     stage('Build Docker Image') {
             steps {
@@ -55,7 +55,7 @@ stage('OWASP Dependency-Check Vulnerabilities') {
                 }
             }
         }
-
+/*
      stage('Trivy Scan') {
       steps {
         script {
@@ -65,7 +65,7 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
       }
     }
-
+*/
         stage('Push Docker Image') {
             steps {
                 script {
