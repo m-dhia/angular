@@ -1,0 +1,18 @@
+---
+- name: Pull and run Docker image mdhiadhia/app-pipeline
+  hosts: app
+  tasks:
+
+    - name: Stop Docker container if it is running
+      command: docker stop app_pipeline
+      ignore_errors: yes
+
+    - name: Remove Docker container if it exists
+      command: docker rm app_pipeline
+      ignore_errors: yes
+
+    - name: Pull Docker image mdhiadhia/app-pipeline
+      command: docker pull mdhiadhia/app-pipeline
+
+    - name: Run Docker container from mdhiadhia/app-pipeline image
+      command: docker run -d -p 4200:80 --name app_pipeline mdhiadhia/app-pipeline
