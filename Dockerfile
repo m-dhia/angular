@@ -1,4 +1,4 @@
-# Use nginx as base image  
+# Use nginx as base image   
 FROM nginx:latest
 
 # Delete the contents of the nginx HTML directory
