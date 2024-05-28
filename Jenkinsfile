@@ -23,19 +23,22 @@ pipeline {
       }
     }
 
-stage('OWASP Dependency-Check Vulnerabilities') {
+    stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
-        dependencyCheck additionalArguments: ''' 
-                    -o './'
-                    -s './'
-                    -f 'ALL' 
-                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-        
+        dependencyCheck additionalArguments: ''
+        '  -
+        o './' -
+          s './' -
+          f 'ALL'
+          --prettyPrint ''
+        ', odcInstallation: '
+        OWASP Dependency - Check Vulnerabilities '
+
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
     }
-    
- stage('SonarQube Analysis') {
+
+    stage('SonarQube Analysis') {
       steps {
         script {
           def scannerHome = tool 'SonarScanner';
@@ -45,18 +48,17 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
       }
     }
- 
 
     stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build the Docker image
-                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
-                }
-            }
+      steps {
+        script {
+          // Build the Docker image
+          docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
         }
+      }
+    }
 
-     stage('Trivy Scan') {
+    stage('Trivy Scan') {
       steps {
         script {
           def timestamp = sh(script: "date +'%S-%M-%H-%d-%m-%Y'", returnStdout: true).trim()
@@ -66,18 +68,18 @@ stage('OWASP Dependency-Check Vulnerabilities') {
       }
     }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    // Push the Docker image to the registry
-                    docker.withRegistry('', DOCKER_PASS) {
-                        def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }
-                }
-            }
+    stage('Push Docker Image') {
+      steps {
+        script {
+          // Push the Docker image to the registry
+          docker.withRegistry('', DOCKER_PASS) {
+            def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
+            dockerImage.push()
+            dockerImage.push('latest')
+          }
         }
+      }
+    }
 
     stage('Deploy with Ansible') {
       steps {
@@ -87,6 +89,6 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
       }
     }
-    
+
   }
 }
