@@ -33,14 +33,18 @@ pipeline {
       }
     }
 
-    stage('SonarQube Analysis') {
+    stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
-        script {
-          def scannerHome = tool 'SonarScanner';
-          withSonarQubeEnv() {
-            sh "${scannerHome}/bin/sonar-scanner"
-          }
-        }
+        dependencyCheck additionalArguments: ''
+        '  -
+        o './' -
+          s './' -
+          f 'ALL'
+          --prettyPrint ''
+        ', odcInstallation: '
+        OWASP Dependency - Check Vulnerabilities '
+
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
     }
 
