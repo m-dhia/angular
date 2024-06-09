@@ -23,16 +23,6 @@ pipeline {
       }
     }
 
-    
-    stage('OWASP Dependency-Check Vulnerabilities') {
-      steps {
-        script {
-          dependencyCheck additionalArguments: '--scan ./ --format ALL --prettyPrint'
-          dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-        }
-      }
-    }
-
     stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
         dependencyCheck additionalArguments: ''
@@ -45,6 +35,17 @@ pipeline {
         OWASP Dependency - Check Vulnerabilities '
 
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
+
+    stage('SonarQube Analysis') {
+      steps {
+        script {
+          def scannerHome = tool 'SonarScanner';
+          withSonarQubeEnv() {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+        }
       }
     }
 
