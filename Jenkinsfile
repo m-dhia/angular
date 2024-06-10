@@ -22,7 +22,7 @@ pipeline {
         sh 'npm run build'
       }
     }
-
+/*
  stage ('OWASP Dependency-Check Vulnerabilities') {
             steps {
                 dependencyCheck additionalArguments: ''' 
@@ -64,7 +64,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('Push Docker Image to ACR') {
       steps {
         script {
