@@ -12,7 +12,7 @@
       ignore_errors: yes
 
     - name: Pull Docker image mdhiadhia/app-pipeline
-      command: docker pull mdhiadhia/app-pipeline:latest
+      command: docker pull  pferegestery.azurecr.io/mdhiadhia/app-pipeline:latest
 
     - name: Run Docker container from mdhiadhia/app-pipeline image
       command: docker run -d -p 4200:80 --name app_pipeline mdhiadhia/app-pipeline:latest
