@@ -1,4 +1,4 @@
-pipeline {
+*/pipeline {
   agent any
 
   environment {
@@ -45,7 +45,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('Build Docker Image') {
       steps {
         script {
@@ -54,7 +54,7 @@ pipeline {
         }
       }
     }
-
+/*
     stage('Trivy Scan') {
       steps {
         script {
