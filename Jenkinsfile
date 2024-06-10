@@ -83,7 +83,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry("https://${ACR_LOGIN_SERVER}", "acr-credentials") {
-            def dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+            def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
             dockerImage.push()
             dockerImage.push('latest')
           }
