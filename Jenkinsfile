@@ -79,7 +79,7 @@ pipeline {
     }
 */
     
-    stage('Build Docker Image') {
+    stage('Push Docker Image') {
       steps {
         script {
           docker.withRegistry("https://${ACR_LOGIN_SERVER}", "acr-credentials") {
