@@ -11,7 +11,7 @@
       command: docker rm app_pipeline
       ignore_errors: yes
 
-    - name: Pull Docker image mdhiadhia/app-pipeline
+    - name: Pull Docker image mdhiadhia/app-pipeline from  pferegestery.azurecr.io
       command: docker pull  pferegestery.azurecr.io/mdhiadhia/app-pipeline:latest
 
     - name: Run Docker container from mdhiadhia/app-pipeline image
