@@ -65,19 +65,6 @@ pipeline {
       }
     }
 
-    stage('Push Docker Image to ACR') {
-      steps {
-        script {
-          withCredentials([usernamePassword(credentialsId: 'acr-credentials', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
-            sh "docker login ${ACR_LOGIN_SERVER} -u ${ACR_USERNAME} -p ${ACR_PASSWORD}"
-            def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
-            dockerImage.push()
-            dockerImage.push('latest')
-          }
-        }
-      }
-    }
-
     
     stage('Push Docker Image') {
       steps {
