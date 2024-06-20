@@ -1,3 +1,4 @@
 Jenkinsfile
 playbook.yml
 sonar-project.properties
+Dockerfile
