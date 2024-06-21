@@ -5,7 +5,6 @@ pipeline {
     APP_NAME = "app-pipeline"
     RELEASE = "1.0.0"
     DOCKER_USER = "mdhiadhia"
-    DOCKER_PASS = 'dockerhub'
     IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
     IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     ACR_LOGIN_SERVER = "pferegestery.azurecr.io"
