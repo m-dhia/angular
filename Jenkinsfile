@@ -5,6 +5,7 @@ pipeline {
     APP_NAME = "front-app"
     RELEASE = "1.0.0"
     DOCKER_USER = "mdhiadhia"
+    DOCKER_PASS = 'dockerhub'
     IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
     IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     ACR_LOGIN_SERVER = "pferegestery.azurecr.io"
@@ -68,7 +69,8 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         script {
-          docker.withRegistry("https://${ACR_LOGIN_SERVER}", "acr-credentials") {
+          // Push the Docker image to the registry
+          docker.withRegistry('', DOCKER_PASS) {
             def dockerImage = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
             dockerImage.push()
             dockerImage.push('latest')
